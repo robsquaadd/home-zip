@@ -31,12 +31,12 @@
 
       <!--Search Bar-->
       <div id="search-container">
-        <form class="col s6 offset-s3">
+        <form class="col s6 offset-s3 z-depth-5">
           <div class="row">
             <div class ="row center"><span class="grey-text">Search For Local Events!</span></div>
             <div class="input-field col s6 offset-s3">
               <input id="search-input" type="text" class="grey-text center">
-              <a id="search-btn" class="waves-effect waves-light btn blue lighten-1">Search</a>
+              <a id="search-btn" class="btn pulse btn blue lighten-1">Search</a>
             </div>
           </div>
         </form>
@@ -44,21 +44,51 @@
 
 
       <!--Results Area-->
-      <div id="results-container" class="row">
+      <div id="results-container" class="row ">
 
           <!-- Goole Map -->
-        <div id="google-map" class="col s9">
+        <div id="google-map" class="col s9 z-depth-5">
           <div class="mapouter"><div class="gmap_canvas"><iframe width="888" height="767" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies-online.net"></a><br><style>.mapouter{position:relative;text-align:right;height:767px;width:888px;}</style><a href="https://www.embedgooglemap.net">custom google maps for website</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:767px;width:888px;}</style></div></div>
         </div>
 
         <!-- Events List-->
-        <div class="col s3">
+        <div class="col s3 z-depth-5">
           <ul id="events-list" class="collection">
             <li class="collection-item">
-              <p id="event-name">Event1 Name</p>
-            <li class="collection-item">Event2 Name</li>
-            <li class="collection-item">Event3</li>
-            <li class="collection-item">Alvin</li>
+              <p id ="event-name">Event1 Name</p>
+              <p id="event-location">Location</p>
+              <p id="event-date">Date</p>
+              <a id="event-link" href="#">This is a link</a>
+            </li>
+            <li class="collection-item">
+              <p id ="event-name">Event2 Name</p>
+              <p id="event-location">Location</p>
+              <p id="event-date">Date</p>
+              <a id="event-link" href="#">This is a link</a>
+            </li>
+            <li class="collection-item">
+              <p id ="event-name">Event3 Name</p>
+              <p id="event-location">Location</p>
+              <p id="event-date">Date</p>
+            </li>
+            <li class="collection-item">
+              <p id ="event-name">Event4 Name</p>
+              <p id="event-location">Location</p>
+              <p id="event-date">Date</p>
+            </li>
+            <li class="collection-item">
+              <p id ="event-name">Event4 Name</p>
+              <p id="event-location">Location </p>
+              <p id="event-date">Date</p>
+            </li><li class="collection-item">
+              <p id ="event-name">Event4 Name</p>
+              <p id="event-location">Location</p>
+              <p id="event-date">Date</p>
+            </li><li class="collection-item">
+              <p id ="event-name">Event4 Name</p>
+              <p id="event-location">Location</p>
+              <p id="event-date">Date</p>
+            </li>
           </ul>
         </div>
 
