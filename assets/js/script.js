@@ -40,9 +40,27 @@ searchBtn.addEventListener('click',search)
 function search (){
   filpCard.classList.remove("hide") 
 
+apiTM ()
+}
+
+function apiTM (){
+let apiKey = "hhfyWLPUTrRWrh5U9TWOti5vcnswA9gG" ;
+let apiUrl = " https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=hhfyWLPUTrRWrh5U9TWOti5vcnswA9gG"
+fetch(apiUrl).then(function(response){
+  if (response.ok) {
+    console.log(apiUrl)
+    return response.json()
+
+    
+
+} else {
+    alert(" Error Try Again") 
 }
 
 
+})
 
+
+}
 
 
