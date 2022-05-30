@@ -1,27 +1,19 @@
-// const options = {
-//   method: "GET",
-//   headers: {
-//     "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com",
-//     "X-RapidAPI-Key": "d84de6e21amsha8ee7921306ee3fp1316c8jsne853c68ba923",
-//   },
-// };
+var seatGeekURL = "https://api.seatgeek.com/2/events";
+var googleMapsURL = "";
 
-// var seatGeekURL = "https://api.seatgeek.com/2/events";
-// var googleMapsURL = "";
+const retrieveZillow = async () => {
+  try {
+    const response = await fetch(zillowURL, options);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-// const retrieveZillow = async () => {
-//   try {
-//     const response = await fetch(zillowURL, options);
-//     const data = await response.json();
-//     console.log(data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+retrieveZillow();
 
-// retrieveZillow();
-
-// clientSecret b340483a7a27e88d5f194b3ecaff1d876de82fb6f8ad348d9ea12020a1b129cf
+//clientSecret b340483a7a27e88d5f194b3ecaff1d876de82fb6f8ad348d9ea12020a1b129cf
 // clientID MjIzNjI4MTd8MTY1MzUyMjkzMS42NzQ0ODU
 
 // <input type = 'submit' placeholder = 'Location'></input>
