@@ -1,17 +1,10 @@
-const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com",
-    "X-RapidAPI-Key": "d84de6e21amsha8ee7921306ee3fp1316c8jsne853c68ba923",
-  },
-};
-
 var seatGeekURL = "https://api.seatgeek.com/2/events";
 var googleMapsURL = "";
+var googleMapsAPIKey = "AIzaSyD7z6JSswDDXqG0HeApZcOasb4Pm0_JVso";
 
-const retrieveZillow = async () => {
+const retrieveEvents = async () => {
   try {
-    const response = await fetch(zillowURL, options);
+    const response = await fetch(seatGeekURL);
     const data = await response.json();
     console.log(data);
   } catch (error) {
