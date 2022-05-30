@@ -30,42 +30,35 @@
 // dynamically generate cards to display on the homepage.
 // dynamically populate the modal with event information.
 
-
 //Grabbing the flip card class from HTML
-let filpCard = document.querySelector(".flip")
+let filpCard = document.querySelector(".flip");
 
 //Grabbing the Search button
-let searchBtn = document.querySelector("#searchBtn")
-searchBtn.addEventListener('click',search)
+let searchBtn = document.querySelector("#searchBtn");
+searchBtn.addEventListener("click", search);
 
-//Grabbing Search input field 
-let searchInput = document.querySelector("#search")
+//Grabbing Search input field
+let searchInput = document.querySelector("#search");
 
+function search() {
+  filpCard.classList.remove("hide");
 
-function search (){
-  filpCard.classList.remove("hide") 
-
-  console.log(searchInput.value)
-apiTM ()
+  console.log(searchInput.value);
+  apiTM();
 }
 
-function apiTM (){
-let apiKey = "hhfyWLPUTrRWrh5U9TWOti5vcnswA9gG" ;
-let apiUrl = " https://app.ticketmaster.com/discovery/v2/events.json?"+ searchInput.value+ "=US&apikey=hhfyWLPUTrRWrh5U9TWOti5vcnswA9gG"
-fetch(apiUrl).then(function(response){
-  if (response.ok) {
-    console.log(apiUrl)
-    return response.json()
-
-    
-
-} else {
-    alert(" Error Try Again") 
+function apiTM() {
+  let apiKey = "hhfyWLPUTrRWrh5U9TWOti5vcnswA9gG";
+  let apiUrl =
+    " https://app.ticketmaster.com/discovery/v2/events.json?" +
+    searchInput.value +
+    "=US&apikey=hhfyWLPUTrRWrh5U9TWOti5vcnswA9gG";
+  fetch(apiUrl).then(function (response) {
+    if (response.ok) {
+      console.log(apiUrl);
+      return response.json();
+    } else {
+      alert(" Error Try Again");
+    }
+  });
 }
-
-
-})
-
-
-}
-
