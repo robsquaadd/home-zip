@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,88 +12,106 @@
     <!--Import materialize.css-->
     <link rel="stylesheet" href="./assets/css/materialize.min.css" />
 
-    <!--Materials Icons-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+    <title>HomeZip</title>
+</head>
 
-    <title>Fun-Zip</title>
-  </head>
-  <body class="blue-grey darken-3">
-
-    <!-- Nav Bar-->
+<body>
     <nav>
-      <div class="nav-wrapper blue darken-3">
-        <a href="index.html" class="brand-logo center">Welcome to Fun-Zip!</a>
-      </div>
+        <div class="nav-wrapper blue">
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="brand-logo">Don't Click Here!</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="placeholder.html">Hotels</a></li>
+                <li><a href="laceholder.html">Comedy</a></li>
+                <li><a href="laceholder.html">Sports</a></li>
+            </ul>
+        </div>
     </nav>
-    
 
-     <!-- Page Content goes here -->
-    <div class="container">
+    <section id="header"> 
+    <h3> Events, Hotels , Drinks </h1>
+    <h5> Search for Your event & book your hotel at the same time !!</h3>
+    </section>
+<br>
+<br> 
+    <div class="jumbo container">   
+        <nav>
+            <div class="nav-wrapper blue">
+               
+                <form>
+                    <div class="input-field">
+                        <input id="search" type="search" required />
+                        <label class="label-icon" for="search"><i class="material-icons"></i></label>
+                        <a class=" btn-large" id="searchBtn">search</a>
+                
 
-      <!--Search Bar-->
-      <div id="search-container">
-        <form class="col s6 offset-s3 z-depth-5">
-          <div class="row">
-            <div class ="row center"><span class="grey-text">Search For Local Events!</span></div>
-            <div class="input-field col s6 offset-s3">
-              <input id="search-input" type="text" class="grey-text center">
-              <a id="search-btn" class="btn pulse btn blue lighten-1">Search</a>
-            </div>
-          </div>
-        </form>
-      </div>
+                    </div>
+                </form>
+                </div>
+                </nav>
+<br>
+<br>
+<br>
+                <main class="flip hide " id="flipCards">
 
 
-      <!--Results Area-->
-      <div id="results-container" class="row ">
+                    <div class="row">
+                        <div class="col s4">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="images.png">
+                                    <span class="card-title">Card Title</span>
+                                </div>
+                                <div class="card-content">
+                                    <p>I am a very simple card. I am good at containing small bits of information.
+                                        I am convenient because I require little markup to use effectively.</p>
+                                </div>
+                                <div class="card-action">
+                                    <a href="#">This is a link</a>
+                                </div>
+                            </div>
+                        </div>
 
-          <!-- Goole Map -->
-        <div id="google-map" class="col s9 z-depth-5">
-          <div class="mapouter"><div class="gmap_canvas"><iframe width="888" height="767" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies-online.net"></a><br><style>.mapouter{position:relative;text-align:right;height:767px;width:888px;}</style><a href="https://www.embedgooglemap.net">custom google maps for website</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:767px;width:888px;}</style></div></div>
-        </div>
 
-        <!-- Events List-->
-        <div class="col s3 z-depth-5">
-          <ul id="events-list" class="collection">
-            <li class="collection-item">
-              <p id ="event-name">Event1 Name</p>
-              <p id="event-location">Location</p>
-              <p id="event-date">Date</p>
-              <a id="event-link" href="#">This is a link</a>
-            </li>
-            <li class="collection-item">
-              <p id ="event-name">Event2 Name</p>
-              <p id="event-location">Location</p>
-              <p id="event-date">Date</p>
-              <a id="event-link" href="#">This is a link</a>
-            </li>
-            <li class="collection-item">
-              <p id ="event-name">Event3 Name</p>
-              <p id="event-location">Location</p>
-              <p id="event-date">Date</p>
-            </li>
-            <li class="collection-item">
-              <p id ="event-name">Event4 Name</p>
-              <p id="event-location">Location</p>
-              <p id="event-date">Date</p>
-            </li>
-            <li class="collection-item">
-              <p id ="event-name">Event4 Name</p>
-              <p id="event-location">Location </p>
-              <p id="event-date">Date</p>
-            </li><li class="collection-item">
-              <p id ="event-name">Event4 Name</p>
-              <p id="event-location">Location</p>
-              <p id="event-date">Date</p>
-            </li><li class="collection-item">
-              <p id ="event-name">Event4 Name</p>
-              <p id="event-location">Location</p>
-              <p id="event-date">Date</p>
-            </li>
-          </ul>
-        </div>
 
-      </div>
+                        <div class="col s4">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="download.jpeg">
+                                    <span class="card-title">Card Title</span>
+                                </div>
+                                <div class="card-content">
+                                    <p>I am a very simple card. I am good at containing small bits of information.
+                                        I am convenient because I require little markup to use effectively.</p>
+                                </div>
+                                <div class="card-action">
+                                    <a href="#">This is a link</a>
+                                </div>
+                            </div>
+                        </div>
+                   
+
+
+                        <div class="col s4">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="download.jpeg">
+                                <span class="card-title">Card Title</span>
+                            </div>
+                            <div class="card-content">
+                                <p>I am a very simple card. I am good at containing small bits of information.
+                                    I am convenient because I require little markup to use effectively.</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">This is a link</a>
+                            </div>
+                        </div>
+
+                    </div> <!--  Ending closing tag for "row class" -->
+                
+                    
+                </main>
+
     </div>
     <footer class="page-footer blue darken-3 center">
         © 2020 Copyright Group 2
@@ -102,8 +121,34 @@
 
     
 
+
+
+
+ 
+
+
+
+    <div class="row">
+
+        <div class="col s3">
+       <h1> Hotel Lists</h1>
+       </div>
+  
+        <div class="col s9">
+         <h1> Map</h1>
+         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3025.605949512095!2d-73.97760428501371!3d40.68265054734824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25bae694479a3%3A0xb9949385da52e69e!2sBarclays%20Center!5e0!3m2!1sen!2sus!4v1653791683331!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+  
+      </div>
+
+
+
+    
+    
+
     <!--Import our js and materialize js files -->
-    <script src="js/materialize.min.js"></script>
+    <!-- <script src="js/materialize.min.js"></script> -->
     <script src="./assets/js/script.js"></script>
-  </body>
+</body>
+
 </html>
