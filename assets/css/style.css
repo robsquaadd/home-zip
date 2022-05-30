@@ -1,9 +1,13 @@
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+.jumbo{
+  padding: 20px;
 }
 
-main {
-  flex: 1 0 auto;
+#header{
+  text-align: center;
+  padding-top: 100px;
+}
+
+.flip{
+
+  padding-top: 150px;
 }
