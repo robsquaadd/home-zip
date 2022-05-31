@@ -39,3 +39,8 @@ function displayEvents(data) {
   }
   filpCard.classList.remove("hide");
 }
+
+// Modal triger
+$(document).ready(function() {
+  $(".modal").modal();
+});

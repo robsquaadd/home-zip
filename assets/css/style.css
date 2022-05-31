@@ -8,6 +8,10 @@
 }
 
 .flip{
-
   padding-top: 150px;
+}
+
+.modal-header{
+  padding: 20px;
+  background-color: #90caf9;
 }
