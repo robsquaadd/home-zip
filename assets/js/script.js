@@ -10,7 +10,7 @@ const cardSection = document.getElementById("card-parent");
 function fetchEventData(e) {
   e.preventDefault();
   let apiKey = "MjIzNjI4MTd8MTY1MzUyMjkzMS42NzQ0ODU";
-  let apiUrl = `https://api.seatgeek.com/2/events?client_id=${apiKey}&q=${searchInput.value}`;
+  let apiUrl = `https://api.seatgeek.com/2/events?client_id=${apiKey}&q=${searchInput.value}&per_page=12`;
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
@@ -55,7 +55,18 @@ function generateCards(data, iterator) {
     eventImageEl.setAttribute("src", "./assets/images/images.png");
   }
   eventImageEl.classList = "card-image";
+  var descriptionEl = document.createElement("div");
+  var dateEl = document.createElement("p");
+  var timeEl = document.createElement("p");
+  var locationEl = document.createElement("p");
+  dateEl.innerHTML =
+    "Date: " + data.events[iterator].datetime_local.substring(0, 11);
+  timeEl.innerHTML =
+    "Time: " + data.events[iterator].datetime_local.substring(12);
+  locationEl.innerHTML = "Location: " + data.events[iterator].venue.name;
+  descriptionEl.append(dateEl, timeEl, locationEl);
   imageContainerEl.append(eventImageEl, titleEl);
   cardEl.appendChild(imageContainerEl);
   cardEl.appendChild(titleEl);
+  cardEl.appendChild(descriptionEl);
 }

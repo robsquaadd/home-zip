@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  box-sizing: content-box;
 }
 
 .jumbo {
@@ -18,4 +19,8 @@
 .class-title {
   z-index: 1;
   color: black;
+}
+
+.card {
+  height: 400px;
 }
