@@ -7,14 +7,10 @@ searchBtn.addEventListener("click", fetchEventData);
 let searchInput = document.querySelector("#search");
 const cardSection = document.getElementById("card-parent");
 
-/*const search = async () => {
-  var eventData = await fetchEventData()
-  displayEvents(eventData)
-}*/
-
-function fetchEventData() {
+function fetchEventData(e) {
+  e.preventDefault();
   let apiKey = "MjIzNjI4MTd8MTY1MzUyMjkzMS42NzQ0ODU";
-  let apiUrl = `https://api.seatgeek.com/2/events?client_id=${apiKey}`;
+  let apiUrl = `https://api.seatgeek.com/2/events?client_id=${apiKey}&q=${searchInput.value}`;
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
@@ -25,17 +21,41 @@ function fetchEventData() {
     })
     .then(function (data) {
       console.log(data);
+      removeOldEvents();
       displayEvents(data);
     });
 }
 
+function removeOldEvents() {
+  var eventsArray = document.querySelectorAll(".card");
+  for (i = 0; i < eventsArray.length; i++) {
+    cardSection.removeChild(eventsArray[i]);
+  }
+}
+
 function displayEvents(data) {
   for (i = 0; i < data.events.length; i++) {
-    console.log(data.events[i]);
-    var cardEl = document.createElement("div");
-    cardEl.classList = "card";
-    cardEl.textContent = data.events[i].title;
-    cardSection.appendChild(cardEl);
+    generateCards(data, i);
   }
   filpCard.classList.remove("hide");
+}
+
+function generateCards(data, iterator) {
+  var cardEl = document.createElement("div");
+  cardEl.classList = "col s4 card";
+  var titleEl = document.createElement("span");
+  titleEl.classList = "card-title";
+  titleEl.innerHTML = data.events[iterator].title;
+  cardSection.appendChild(cardEl);
+  var imageContainerEl = document.createElement("div");
+  var eventImageEl = document.createElement("img");
+  if (data.events[i].performers[0].image != null) {
+    eventImageEl.setAttribute("src", data.events[iterator].performers[0].image);
+  } else {
+    eventImageEl.setAttribute("src", "./assets/images/images.png");
+  }
+  eventImageEl.classList = "card-image";
+  imageContainerEl.append(eventImageEl, titleEl);
+  cardEl.appendChild(imageContainerEl);
+  cardEl.appendChild(titleEl);
 }

@@ -1,130 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="./assets/css/style.css" />
 
-  <!--Import materialize.css-->
-  <link rel="stylesheet" href="./assets/css/style.css" />
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="./assets/css/materialize.min.css" />
+    <title>FunZip</title>
+  </head>
 
-  <!--Import materialize.css-->
-  <link rel="stylesheet" href="./assets/css/materialize.min.css" />
-  <title>HomeZip</title>
-</head>
-
-<body>
-  <nav>
-    <div class="nav-wrapper blue">
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="brand-logo">Don't Click Here!</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="placeholder.html">Hotels</a></li>
-            <li><a href="placeholder.html">Comedy</a></li>
-            <li><a href="placeholder.html">Sports</a></li>
-        </ul>
-    </div>
-  </nav>
-
-  <section id="header"> 
-  <h3> Events, Hotels , Drinks </h3>
-  <h5> Search for Your event & book your hotel at the same time !!</h5>
-  </section><br><br> 
-  <div class="jumbo container">   
+  <body>
     <nav>
       <div class="nav-wrapper blue">
-        <form>
-          <div class="input-field">
-              <input id="search" type="search" required />
-              <label class="label-icon" for="search"><i class="material-icons"></i></label>
-              <a class=" btn-large" id="searchBtn">search</a>
-          </div>
-        </form>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="brand-logo"
+          >Don't Click Here!</a
+        >
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="placeholder.html">Hotels</a></li>
+          <li><a href="placeholder.html">Comedy</a></li>
+          <li><a href="placeholder.html">Sports</a></li>
+        </ul>
       </div>
-    </nav><br><br><br>
-  </div>
-  <main class="flip hide " id="flipCards">
-    <div class="row">
-      <div id="card-parent" class="col s3">
-        <div class="card">
-          <div class="card-image">
-            <img src="images.png">
-            <span class="card-title">Card Title</span>
-          </div>
-          <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-          </div>
-          <div class="card-action">
-              <a href="#">This is a link</a>
-          </div>
+    </nav>
+
+    <section id="header">
+      <h3>Events, Hotels , Drinks</h3>
+      <h4>Search for Your event & book your hotel at the same time !!</h4>
+    </section>
+    <br /><br />
+    <div class="jumbo container">
+      <nav>
+        <div class="nav-wrapper blue">
+          <form>
+            <div class="input-field">
+              <input id="search" type="search" title="search-city" required />
+              <label class="label-icon" for="search"
+                ><i class="material-icons"></i
+              ></label>
+              <a class="btn-large" id="searchBtn">search</a>
+            </div>
+          </form>
         </div>
-      </div>
-
-
-
-    <div class="col s4">
-        <div class="card">
-            <div class="card-image">
-                <img src="download.jpeg">
-                <span class="card-title">Card Title</span>
-            </div>
-            <div class="card-content">
-                <p>I am a very simple card. I am good at containing small bits of information.
-                    I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-                <a href="#">This is a link</a>
-            </div>
-        </div>
+      </nav>
+      <br /><br /><br />
     </div>
-                   
-
-
-                        <div class="col s4">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="download.jpeg">
-                                <span class="card-title">Card Title</span>
-                            </div>
-                            <div class="card-content">
-                                <p>I am a very simple card. I am good at containing small bits of information.
-                                    I am convenient because I require little markup to use effectively.</p>
-                            </div>
-                            <div class="card-action">
-                                <a href="#">This is a link</a>
-                            </div>
-                        </div>
-
-                    </div> <!--  Ending closing tag for "row class" -->
-                
-                    
-                
-
-    </div>
+    <main class="flip hide" id="flipCards">
+      <div id="card-parent" class="row"></div>
+    </main>
     <footer class="page-footer blue darken-3 center">
       © 2020 Copyright Group 2
     </footer>
-    
-    <div class="row">
 
-        <div class="col s3">
-       <h1> Hotel Lists</h1>
-       </div>
-  
-        <div class="col s9">
-        </div>
-  
+    <div class="row">
+      <div class="col s3">
+        <h1>Hotel Lists</h1>
       </div>
 
-
-
-    
-    
+      <div class="col s9"></div>
+    </div>
 
     <!--Import our js and materialize js files -->
     <!-- <script src="js/materialize.min.js"></script> -->
     <script src="./assets/js/script.js"></script>
-</body>
-
+  </body>
 </html>
