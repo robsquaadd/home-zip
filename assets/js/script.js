@@ -26,6 +26,23 @@ function fetchEventData(e) {
     });
 }
 
+/*
+async function retrieveHotelData() {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
+      "X-RapidAPI-Key": "d84de6e21amsha8ee7921306ee3fp1316c8jsne853c68ba923",
+    },
+  };
+  const response = await fetch(
+    "https://booking-com.p.rapidapi.com/v1/hotels/search?checkout_date=2022-10-01&units=metric&dest_id=-553173&dest_type=city&locale=en-gb&adults_number=2&order_by=popularity&filter_by_currency=AED&checkin_date=2022-09-30&room_number=1&children_number=2&page_number=0&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&include_adjacency=true",
+    options
+  );
+  const data = response.json();
+}
+*/
+
 function removeOldEvents() {
   var eventsArray = document.querySelectorAll(".card");
   for (i = 0; i < eventsArray.length; i++) {
@@ -58,13 +75,15 @@ function generateCards(data, iterator) {
   var descriptionEl = document.createElement("div");
   var dateEl = document.createElement("p");
   var timeEl = document.createElement("p");
-  var locationEl = document.createElement("p");
+  var locationNameEl = document.createElement("p");
+  var addressEl = document.createElement("p");
+  addressEl.innerHTML = "Adress: " + data.events[iterator].venue.address;
   dateEl.innerHTML =
-    "Date: " + data.events[iterator].datetime_local.substring(0, 11);
+    "Date: " + data.events[iterator].datetime_local.substring(0, 10);
   timeEl.innerHTML =
-    "Time: " + data.events[iterator].datetime_local.substring(12);
-  locationEl.innerHTML = "Location: " + data.events[iterator].venue.name;
-  descriptionEl.append(dateEl, timeEl, locationEl);
+    "Time: " + data.events[iterator].datetime_local.substring(11);
+  locationNameEl.innerHTML = "Location: " + data.events[iterator].venue.name;
+  descriptionEl.append(dateEl, timeEl, locationNameEl, addressEl);
   imageContainerEl.append(eventImageEl, titleEl);
   cardEl.appendChild(imageContainerEl);
   cardEl.appendChild(titleEl);
