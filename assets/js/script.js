@@ -1,23 +1,18 @@
 //clientSecret b340483a7a27e88d5f194b3ecaff1d876de82fb6f8ad348d9ea12020a1b129cf
 // clientID MjIzNjI4MTd8MTY1MzUyMjkzMS42NzQ0ODU
 
-//Grabbing the flip card class from HTML
 let filpCard = document.querySelector(".flip");
-
-//Grabbing the Search button
 let searchBtn = document.querySelector("#searchBtn");
-searchBtn.addEventListener("click", search);
-
-//Grabbing Search input field
+searchBtn.addEventListener("click", fetchEventData);
 let searchInput = document.querySelector("#search");
+const cardSection = document.getElementById("card-parent");
 
-function search() {
-  filpCard.classList.remove("hide");
-  console.log(searchInput.value);
-  apiTM();
-}
+/*const search = async () => {
+  var eventData = await fetchEventData()
+  displayEvents(eventData)
+}*/
 
-function apiTM() {
+function fetchEventData() {
   let apiKey = "MjIzNjI4MTd8MTY1MzUyMjkzMS42NzQ0ODU";
   let apiUrl = `https://api.seatgeek.com/2/events?client_id=${apiKey}`;
   fetch(apiUrl)
@@ -30,5 +25,17 @@ function apiTM() {
     })
     .then(function (data) {
       console.log(data);
+      displayEvents(data);
     });
+}
+
+function displayEvents(data) {
+  for (i = 0; i < data.events.length; i++) {
+    console.log(data.events[i]);
+    var cardEl = document.createElement("div");
+    cardEl.classList = "card";
+    cardEl.textContent = data.events[i].title;
+    cardSection.appendChild(cardEl);
+  }
+  filpCard.classList.remove("hide");
 }
