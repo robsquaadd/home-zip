@@ -28,6 +28,7 @@ function fetchEventData(e) {
 
 async function retrieveHotelData(locationData, eventData, iterator) {
   var checkOutDate = determineCheckoutDate(eventData, iterator);
+  console.log(checkOutDate);
   const options = {
     method: "GET",
     headers: {
@@ -41,10 +42,7 @@ async function retrieveHotelData(locationData, eventData, iterator) {
     iterator
   ].venue.country.toLowerCase()}&adults_number=2&order_by=popularity&filter_by_currency=USD&checkin_date=${eventData.events[
     iterator
-  ].datetime_local.substring(
-    0,
-    10
-  )}&room_number=1&children_number=0&page_number=0&categories_filter_ids=include_adjacency=true`;
+  ].datetime_local.substring(0, 10)}&room_number=1`;
   const response = await fetch(hotelAPIURL, options);
   const data = await response.json();
   console.log(data);
@@ -53,9 +51,10 @@ async function retrieveHotelData(locationData, eventData, iterator) {
 function determineCheckoutDate(eventData, iterator) {
   var date = eventData.events[iterator].datetime_local.substring(0, 10);
   var unixDate = Date.parse(date);
-  var newUnixDate = unixDate + 86400000;
+  var newUnixDate = parseFloat(unixDate) + 86400000 * 2;
   var newDate = new Date(newUnixDate);
-  return newDate;
+  var momentDate = moment(newDate).format("YYYY-MM-DD");
+  return momentDate;
 }
 
 async function retrieveLocationData(eventData, iterator) {
