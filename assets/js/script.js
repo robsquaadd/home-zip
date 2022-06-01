@@ -25,9 +25,8 @@ function fetchEventData(e) {
       displayEvents(data);
     });
 }
-
 /*
-async function retrieveHotelData() {
+async function retrieveHotelData(eventData, iterator) {
   const options = {
     method: "GET",
     headers: {
@@ -35,15 +34,31 @@ async function retrieveHotelData() {
       "X-RapidAPI-Key": "d84de6e21amsha8ee7921306ee3fp1316c8jsne853c68ba923",
     },
   };
-  const response = await fetch(
-    "https://booking-com.p.rapidapi.com/v1/hotels/search?checkout_date=2022-10-01&units=metric&dest_id=-553173&dest_type=city&locale=en-gb&adults_number=2&order_by=popularity&filter_by_currency=AED&checkin_date=2022-09-30&room_number=1&children_number=2&page_number=0&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&include_adjacency=true",
-    options
-  );
-  const data = response.json();
+  const hotelAPIURL =
+    "https://booking-com.p.rapidapi.com/v1/hotels/search?checkout_date=2022-10-01&units=imperial&dest_id=-553173&dest_type=city&locale=en-gb&adults_number=2&order_by=popularity&filter_by_currency=USD&checkin_date=2022-09-30&room_number=1&children_number=0&page_number=0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&include_adjacency=true";
+  const response = await fetch(hotelAPIURL, options);
+  const data = await response.json();
+  console.log(data);
 }
 */
+async function retrieveLocationData(eventData, iterator) {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
+      "X-RapidAPI-Key": "d84de6e21amsha8ee7921306ee3fp1316c8jsne853c68ba923",
+    },
+  };
+  locationAPIURL = `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-${eventData.events[
+    iterator
+  ].venue.country.toLowerCase()}&name=${eventData.events[iterator].venue.city}`;
+  const response = await fetch(locationAPIURL, options);
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
 
-function hotelApi(eventData) {
+/*function hotelApi(eventData, iterator) {
   const options = {
     method: "GET",
     headers: {
@@ -51,21 +66,20 @@ function hotelApi(eventData) {
       "X-RapidAPI-Key": "e5eb4ef180mshbf601c540e61cb2p1b592bjsnf529ab523414",
     },
   };
-
   fetch(
-    "https://hotel-price-aggregator.p.rapidapi.com/search?q=300%2016th%20st",
+    `https://hotel-price-aggregator.p.rapidapi.com/search?q=${eventData.events[iterator].venue.city}`,
     options
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data[0].address);
+      console.log(data);
       displayHotels(data, eventData);
     })
     .catch((err) => console.error(err));
 }
-
+*/
 function removeOldEvents() {
-  var eventsArray = document.querySelectorAll(".card");
+  var eventsArray = document.querySelectorAll(".event-card");
   for (i = 0; i < eventsArray.length; i++) {
     cardSection.removeChild(eventsArray[i]);
   }
@@ -80,7 +94,7 @@ function displayEvents(data) {
 
 function generateCards(data, iterator) {
   var cardEl = document.createElement("div");
-  cardEl.classList = "col s4 card";
+  cardEl.classList = "col s4 card event-card";
   var titleEl = document.createElement("span");
   titleEl.classList = "card-title";
   titleEl.innerHTML = data.events[iterator].title;
@@ -118,13 +132,20 @@ function generateCards(data, iterator) {
   cardEl.appendChild(imageContainerEl);
   cardEl.appendChild(titleEl);
   cardEl.appendChild(descriptionEl);
-  modalButtonEl.addEventListener("click", () => {
-    hotelApi(data);
+  modalButtonEl.addEventListener("click", async () => {
+    var locationData = await retrieveLocationData(data, iterator);
+    //retrieveHotelData(data, iterator);
   });
 }
 
-function displayHotels() {
-  console.log("hello world");
+function displayHotels(hotelData, eventData) {
+  var modalEl = document.getElementById("modal1");
+  for (i = 0; i < hotelData.length; i++) {
+    var hotelCardEl = document.createElement("div");
+    hotelCardEl.classList = "card row";
+    var hotelNameEl = document.createElement("h5");
+    var hotelAddressEl = document.createElement("p");
+  }
 }
 
 // modal trigger
