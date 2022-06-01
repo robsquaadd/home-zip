@@ -32,6 +32,7 @@ function fetchEventData(e) {
       removeOldEvents();
       displayEvents(data);
       addToSearchHistory(e);
+      pageScroll();
     });
 }
 
@@ -248,4 +249,8 @@ function removeOldHotels() {
       modalEl.removeChild(hotelCardsArray[i]);
     }
   }
+}
+
+function pageScroll() {
+  window.scrollBy(0, 950);
 }

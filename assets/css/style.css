@@ -2,6 +2,9 @@
   margin: 0;
   box-sizing: content-box;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 .jumbo {
   padding: 20px;
