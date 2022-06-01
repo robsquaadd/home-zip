@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/materialize.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <title>FunZip</title>
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-wrapper blue">
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="brand-logo"
+          >Don't Click Here!</a
+        >
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="placeholder.html">Hotels</a></li>
+          <li><a href="placeholder.html">Comedy</a></li>
+          <li><a href="placeholder.html">Sports</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="bg-img">
+      <section id="header">
+        <div class="bg-color center row">
+          <h3>Events, Hotels, Drinks</h3>
+          <h4>Search for Your event & book your hotel at the same time !!</h4>
+        </div>
+      </section>
+      <br /><br />
+      <div class="jumbo container">
+        <nav>
+          <div class="nav-wrapper blue">
+            <form>
+              <div class="input-field">
+                <input id="search" type="search" title="search-city" required />
+                <label class="label-icon" for="search"
+                  ><i class="material-icons"></i
+                ></label>
+                <a href="#footer" class="btn-large" id="searchBtn">search</a>
+              </div>
+            </form>
+          </div>
+        </nav>
+        <br /><br /><br />
+      </div>
+    </div>
+
+    <main class="flip hide" id="flipCards">
+      <div id="card-parent" class="row"></div>
+    </main>
+    <footer class="page-footer blue darken-3 center" id="footer">
+      © 2020 Copyright Group 2
+    </footer>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="card-parent modal z-depth-4"></div>
+
+    <!--Import our js and materialize js files -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./assets/js/materialize.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>

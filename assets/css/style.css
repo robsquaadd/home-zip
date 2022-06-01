@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  box-sizing: content-box;
+}
+
+.jumbo {
+  padding: 20px;
+}
+
+#header {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.bg-color {
+  background-color: rgba(255, 255, 255, 0.75);
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.flip {
+  padding-top: 150px;
+}
+
+.class-title {
+  z-index: 1;
+  color: black;
+}
+
+.event-card {
+  height: 400px;
+}
+
+.bg-img {
+  background-image: url("../pics/concertImg1.jpeg");
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
