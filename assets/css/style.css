@@ -40,11 +40,3 @@
   background-size: cover;
 }
 
-@media (max-width: 900px) {
-  .bg-img {
-    background-image: url("../pics/concertImg1.jpeg");
-    min-height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-}
