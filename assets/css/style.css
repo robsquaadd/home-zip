@@ -1,13 +1,26 @@
-.jumbo{
+* {
+  margin: 0;
+  box-sizing: content-box;
+}
+
+.jumbo {
   padding: 20px;
 }
 
-#header{
+#header {
   text-align: center;
   padding-top: 100px;
 }
 
-.flip{
-
+.flip {
   padding-top: 150px;
+}
+
+.class-title {
+  z-index: 1;
+  color: black;
+}
+
+.card {
+  height: 400px;
 }
