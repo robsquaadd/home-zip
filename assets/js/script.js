@@ -6,11 +6,19 @@ let searchBtn = document.querySelector("#searchBtn");
 searchBtn.addEventListener("click", fetchEventData);
 let searchInput = document.querySelector("#search");
 const cardSection = document.getElementById("card-parent");
+const searchHistoryEl = document.getElementById("search-history");
 
 function fetchEventData(e) {
+  console.log(e.target);
   e.preventDefault();
   let apiKey = "MjIzNjI4MTd8MTY1MzUyMjkzMS42NzQ0ODU";
-  let apiUrl = `https://api.seatgeek.com/2/events?client_id=${apiKey}&q=${searchInput.value}&per_page=12`;
+  if (e.target === searchBtn) {
+    var apiUrl = `https://api.seatgeek.com/2/events?client_id=${apiKey}&q=${searchInput.value}&per_page=12`;
+  } else {
+    console.log(e.target.textContent);
+    var apiUrl = `https://api.seatgeek.com/2/events?client_id=${apiKey}&q=${e.target.textContent}&per_page=12`;
+  }
+  console.log(apiUrl);
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
@@ -23,7 +31,23 @@ function fetchEventData(e) {
       console.log(data);
       removeOldEvents();
       displayEvents(data);
+      addToSearchHistory(e);
     });
+}
+
+function addToSearchHistory(e) {
+  var searchHistoryArray = JSON.parse(localStorage.getItem("searchHistory"));
+  console.log(e.target);
+  if (!searchHistoryArray && e.target === searchBtn) {
+    searchHistoryArray = [searchInput.value];
+  } else if (!searchHistoryArray) {
+    searchHistoryArray = [e.target.textContent];
+  } else if (searchHistoryArray && e.target === searchBtn) {
+    searchHistoryArray.push(searchInput.value);
+  } else {
+    searchHistoryArray.push(e.target.textContent);
+  }
+  localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
 }
 
 async function retrieveHotelData(locationData, eventData, iterator) {
@@ -45,7 +69,7 @@ async function retrieveHotelData(locationData, eventData, iterator) {
   ].datetime_local.substring(0, 10)}&room_number=1`;
   const response = await fetch(hotelAPIURL, options);
   const data = await response.json();
-  console.log(data);
+  return data;
 }
 
 function determineCheckoutDate(eventData, iterator) {
@@ -96,8 +120,10 @@ async function retrieveLocationData(eventData, iterator) {
 */
 function removeOldEvents() {
   var eventsArray = document.querySelectorAll(".event-card");
-  for (i = 0; i < eventsArray.length; i++) {
-    cardSection.removeChild(eventsArray[i]);
+  if (eventsArray) {
+    for (i = 0; i < eventsArray.length; i++) {
+      cardSection.removeChild(eventsArray[i]);
+    }
   }
 }
 
@@ -110,7 +136,7 @@ function displayEvents(data) {
 
 function generateCards(data, iterator) {
   var cardEl = document.createElement("div");
-  cardEl.classList = "col s12 m4 l4 card event-card";
+  cardEl.classList = "col s12 m4 l4 card event-card hoverable";
   var titleEl = document.createElement("span");
   titleEl.classList = "card-title";
   titleEl.innerHTML = data.events[iterator].title;
@@ -131,6 +157,7 @@ function generateCards(data, iterator) {
   var modalButtonEl = document.createElement("a");
   modalButtonEl.classList = "waves-effect waves-light btn modal-trigger";
   modalButtonEl.setAttribute("href", "#modal1");
+  modalButtonEl.textContent = "HOTELS";
   addressEl.innerHTML = "Adress: " + data.events[iterator].venue.address;
   dateEl.innerHTML =
     "Date: " + data.events[iterator].datetime_local.substring(0, 10);
@@ -149,18 +176,40 @@ function generateCards(data, iterator) {
   cardEl.appendChild(titleEl);
   cardEl.appendChild(descriptionEl);
   modalButtonEl.addEventListener("click", async () => {
+    removeOldHotels();
     var locationData = await retrieveLocationData(data, iterator);
-    retrieveHotelData(locationData, data, iterator);
+    var hotelData = await retrieveHotelData(locationData, data, iterator);
+    displayHotels(hotelData);
   });
 }
 
-function displayHotels(hotelData, eventData) {
+function displayHotels(hotelData) {
   var modalEl = document.getElementById("modal1");
-  for (i = 0; i < hotelData.length; i++) {
+  for (i = 0; i < hotelData.result.length; i++) {
     var hotelCardEl = document.createElement("div");
-    hotelCardEl.classList = "card row";
+    hotelCardEl.classList = "card row hotel-card";
+    var hotelImageEl = document.createElement("img");
+    hotelImageEl.setAttribute("src", hotelData.result[i].max_1440_photo_url);
+    hotelImageEl.classList = "col s4";
+    var hotelInfoEl = document.createElement("div");
+    hotelInfoEl.classList = "col s5";
     var hotelNameEl = document.createElement("h5");
+    hotelNameEl.innerHTML = hotelData.result[i].hotel_name;
     var hotelAddressEl = document.createElement("p");
+    hotelAddressEl.innerHTML = hotelData.result[i].address;
+    var toBookingCom = document.createElement("div");
+    var hotelPriceEl = document.createElement("p");
+    hotelPriceEl.innerHTML =
+      hotelData.result[i].price_breakdown.all_inclusive_price;
+    hotelPriceEl.classList = "col s3";
+    toBookingComButtonEl = document.createElement("a");
+    toBookingComButtonEl.classList = "waves-effect waves-light btn";
+    toBookingComButtonEl.textContent = "BOOK NOW";
+    toBookingComButtonEl.setAttribute("href", hotelData.result[i].url);
+    toBookingCom.append(hotelPriceEl, toBookingComButtonEl);
+    hotelInfoEl.append(hotelNameEl, hotelAddressEl);
+    hotelCardEl.append(hotelImageEl, hotelInfoEl, toBookingCom);
+    modalEl.append(hotelCardEl);
   }
 }
 
@@ -168,3 +217,35 @@ function displayHotels(hotelData, eventData) {
 $(document).ready(function () {
   $(".modal").modal();
 });
+
+searchHistoryEl.addEventListener("click", () => {
+  var historyModal = document.getElementById("history-modal");
+  var formerSearchHistory = document.querySelectorAll(".search-history-button");
+  for (i = 0; i < formerSearchHistory.length; i++) {
+    historyModal.removeChild(formerSearchHistory[i]);
+  }
+  var searchHistoryArray = JSON.parse(localStorage.getItem("searchHistory"));
+  if (searchHistoryArray) {
+    for (i = searchHistoryArray.length - 1; i >= 0; i--) {
+      var historyButtonEl = document.createElement("a");
+      historyButtonEl.classList =
+        "waves-effect waves-light btn search-history-button col s12";
+      historyButtonEl.textContent = searchHistoryArray[i];
+      historyButtonEl.addEventListener("click", (e) => {
+        $("#history-modal").modal("close");
+        fetchEventData(e);
+      });
+      historyModal.appendChild(historyButtonEl);
+    }
+  }
+});
+
+function removeOldHotels() {
+  var modalEl = document.getElementById("modal1");
+  var hotelCardsArray = document.querySelectorAll(".hotel-card");
+  if (hotelCardsArray) {
+    for (i = 0; i < hotelCardsArray.length; i++) {
+      modalEl.removeChild(hotelCardsArray[i]);
+    }
+  }
+}
