@@ -25,8 +25,9 @@ function fetchEventData(e) {
       displayEvents(data);
     });
 }
-/*
-async function retrieveHotelData(eventData, iterator) {
+
+async function retrieveHotelData(locationData, eventData, iterator) {
+  var checkOutDate = determineCheckoutDate(eventData, iterator);
   const options = {
     method: "GET",
     headers: {
@@ -34,13 +35,29 @@ async function retrieveHotelData(eventData, iterator) {
       "X-RapidAPI-Key": "d84de6e21amsha8ee7921306ee3fp1316c8jsne853c68ba923",
     },
   };
-  const hotelAPIURL =
-    "https://booking-com.p.rapidapi.com/v1/hotels/search?checkout_date=2022-10-01&units=imperial&dest_id=-553173&dest_type=city&locale=en-gb&adults_number=2&order_by=popularity&filter_by_currency=USD&checkin_date=2022-09-30&room_number=1&children_number=0&page_number=0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&include_adjacency=true";
+  const hotelAPIURL = `https://booking-com.p.rapidapi.com/v1/hotels/search?checkout_date=${checkOutDate}&units=imperial&dest_id=${
+    locationData[0].dest_id
+  }&dest_type=${locationData[0].dest_type}&locale=en-${eventData.events[
+    iterator
+  ].venue.country.toLowerCase()}&adults_number=2&order_by=popularity&filter_by_currency=USD&checkin_date=${eventData.events[
+    iterator
+  ].datetime_local.substring(
+    0,
+    10
+  )}&room_number=1&children_number=0&page_number=0&categories_filter_ids=include_adjacency=true`;
   const response = await fetch(hotelAPIURL, options);
   const data = await response.json();
   console.log(data);
 }
-*/
+
+function determineCheckoutDate(eventData, iterator) {
+  var date = eventData.events[iterator].datetime_local.substring(0, 10);
+  var unixDate = Date.parse(date);
+  var newUnixDate = unixDate + 86400000;
+  var newDate = new Date(newUnixDate);
+  return newDate;
+}
+
 async function retrieveLocationData(eventData, iterator) {
   const options = {
     method: "GET",
@@ -134,7 +151,7 @@ function generateCards(data, iterator) {
   cardEl.appendChild(descriptionEl);
   modalButtonEl.addEventListener("click", async () => {
     var locationData = await retrieveLocationData(data, iterator);
-    //retrieveHotelData(data, iterator);
+    retrieveHotelData(locationData, data, iterator);
   });
 }
 
