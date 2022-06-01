@@ -89,3 +89,8 @@ function generateCards(data, iterator) {
   cardEl.appendChild(titleEl);
   cardEl.appendChild(descriptionEl);
 }
+
+// modal trigger
+$(document).ready(function(){
+  $('.modal').modal();
+});
