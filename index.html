@@ -4,12 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!--Import materialize.css-->
-    <link rel="stylesheet" href="./assets/css/style.css" />
-
-    <!--Import materialize.css-->
     <link rel="stylesheet" href="./assets/css/materialize.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    
     <title>FunZip</title>
   </head>
 
@@ -26,43 +23,39 @@
         </ul>
       </div>
     </nav>
-
-    <section id="header">
-      <h3>Events, Hotels , Drinks</h3>
-      <h4>Search for Your event & book your hotel at the same time !!</h4>
-    </section>
-    <br /><br />
-    <div class="jumbo container">
-      <nav>
-        <div class="nav-wrapper blue">
-          <form>
-            <div class="input-field">
-              <input id="search" type="search" title="search-city" required />
-              <label class="label-icon" for="search"
-                ><i class="material-icons"></i
-              ></label>
-              <a class="btn-large" id="searchBtn">search</a>
-            </div>
-          </form>
+    <div class="bg-img">
+      <section id="header">
+        <div class="bg-color center row">
+          <h3>Events, Hotels, Drinks</h3>
+          <h4>Search for Your event & book your hotel at the same time !!</h4>
         </div>
-      </nav>
-      <br /><br /><br />
+      </section>
+      <br /><br />
+      <div class="jumbo container">
+        <nav>
+          <div class="nav-wrapper blue">
+            <form>
+              <div class="input-field">
+                <input id="search" type="search" title="search-city" required />
+                <label class="label-icon" for="search"
+                  ><i class="material-icons"></i
+                ></label>
+                <a href="#footer" class="btn-large" id="searchBtn">search</a>
+              </div>
+            </form>
+          </div>
+        </nav>
+        <br /><br /><br />
+      </div>
     </div>
+
 
     <main class="flip hide" id="flipCards">
       <div id="card-parent" class="row"></div>
     </main>
-    <footer class="page-footer blue darken-3 center">
+    <footer class="page-footer blue darken-3 center" id="footer">
       © 2020 Copyright Group 2
     </footer>
-
-    <div class="row">
-      <div class="col s3">
-        <h1>Hotel Lists</h1>
-      </div>
-
-      <div class="col s9"></div>
-    </div>
 
     <!-- Modal Structure -->
     <div id="modal1" class="card-parent-1 modal z-depth-4">
