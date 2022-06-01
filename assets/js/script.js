@@ -43,6 +43,24 @@ async function retrieveHotelData() {
 }
 */
 
+function hotelApi() {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Host": "hotel-price-aggregator.p.rapidapi.com",
+      "X-RapidAPI-Key": "e5eb4ef180mshbf601c540e61cb2p1b592bjsnf529ab523414",
+    },
+  };
+
+  fetch(
+    "https://hotel-price-aggregator.p.rapidapi.com/search?q=300%2016th%20st",
+    options
+  )
+    .then((response) => response.json())
+    .then((data) => console.log(data[0].address))
+    .catch((err) => console.error(err));
+}
+
 function removeOldEvents() {
   var eventsArray = document.querySelectorAll(".card");
   for (i = 0; i < eventsArray.length; i++) {
