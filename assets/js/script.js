@@ -16,7 +16,7 @@ function fetchEventData(e) {
       if (response.ok) {
         return response.json();
       } else {
-        alert(" Error Try Again");
+        alert("Error Try Again");
       }
     })
     .then(function (data) {
@@ -43,7 +43,7 @@ async function retrieveHotelData() {
 }
 */
 
-function hotelApi() {
+function hotelApi(eventData) {
   const options = {
     method: "GET",
     headers: {
@@ -57,7 +57,10 @@ function hotelApi() {
     options
   )
     .then((response) => response.json())
-    .then((data) => console.log(data[0].address))
+    .then((data) => {
+      console.log(data[0].address);
+      displayHotels(data, eventData);
+    })
     .catch((err) => console.error(err));
 }
 
@@ -115,6 +118,13 @@ function generateCards(data, iterator) {
   cardEl.appendChild(imageContainerEl);
   cardEl.appendChild(titleEl);
   cardEl.appendChild(descriptionEl);
+  modalButtonEl.addEventListener("click", () => {
+    hotelApi(data);
+  });
+}
+
+function displayHotels() {
+  console.log("hello world");
 }
 
 // modal trigger
