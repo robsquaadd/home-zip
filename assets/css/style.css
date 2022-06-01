@@ -24,7 +24,7 @@
   padding-top: 150px;
 }
 
-.class-title {
+.card-title {
   z-index: 1;
   color: black;
 }
@@ -38,4 +38,8 @@
   min-height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.brand-logo {
+  margin: auto auto auto 20px;
 }
