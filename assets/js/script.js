@@ -77,13 +77,22 @@ function generateCards(data, iterator) {
   var timeEl = document.createElement("p");
   var locationNameEl = document.createElement("p");
   var addressEl = document.createElement("p");
+  var modalButtonEl = document.createElement("a");
+  modalButtonEl.classList = "waves-effect waves-light btn modal-trigger";
+  modalButtonEl.setAttribute("href", "#modal1");
   addressEl.innerHTML = "Adress: " + data.events[iterator].venue.address;
   dateEl.innerHTML =
     "Date: " + data.events[iterator].datetime_local.substring(0, 10);
   timeEl.innerHTML =
     "Time: " + data.events[iterator].datetime_local.substring(11);
   locationNameEl.innerHTML = "Location: " + data.events[iterator].venue.name;
-  descriptionEl.append(dateEl, timeEl, locationNameEl, addressEl);
+  descriptionEl.append(
+    dateEl,
+    timeEl,
+    locationNameEl,
+    addressEl,
+    modalButtonEl
+  );
   imageContainerEl.append(eventImageEl, titleEl);
   cardEl.appendChild(imageContainerEl);
   cardEl.appendChild(titleEl);
@@ -91,6 +100,6 @@ function generateCards(data, iterator) {
 }
 
 // modal trigger
-$(document).ready(function(){
-  $('.modal').modal();
+$(document).ready(function () {
+  $(".modal").modal();
 });
