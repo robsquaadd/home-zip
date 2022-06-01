@@ -16,7 +16,7 @@ function fetchEventData(e) {
       if (response.ok) {
         return response.json();
       } else {
-        alert(" Error Try Again");
+        alert("Error Try Again");
       }
     })
     .then(function (data) {
@@ -42,6 +42,27 @@ async function retrieveHotelData() {
   const data = response.json();
 }
 */
+
+function hotelApi(eventData) {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Host": "hotel-price-aggregator.p.rapidapi.com",
+      "X-RapidAPI-Key": "e5eb4ef180mshbf601c540e61cb2p1b592bjsnf529ab523414",
+    },
+  };
+
+  fetch(
+    "https://hotel-price-aggregator.p.rapidapi.com/search?q=300%2016th%20st",
+    options
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data[0].address);
+      displayHotels(data, eventData);
+    })
+    .catch((err) => console.error(err));
+}
 
 function removeOldEvents() {
   var eventsArray = document.querySelectorAll(".card");
@@ -77,26 +98,39 @@ function generateCards(data, iterator) {
   var timeEl = document.createElement("p");
   var locationNameEl = document.createElement("p");
   var addressEl = document.createElement("p");
+  var modalButtonEl = document.createElement("a");
+  modalButtonEl.classList = "waves-effect waves-light btn modal-trigger";
+  modalButtonEl.setAttribute("href", "#modal1");
   addressEl.innerHTML = "Adress: " + data.events[iterator].venue.address;
   dateEl.innerHTML =
     "Date: " + data.events[iterator].datetime_local.substring(0, 10);
   timeEl.innerHTML =
     "Time: " + data.events[iterator].datetime_local.substring(11);
   locationNameEl.innerHTML = "Location: " + data.events[iterator].venue.name;
-  descriptionEl.append(dateEl, timeEl, locationNameEl, addressEl);
+  descriptionEl.append(
+    dateEl,
+    timeEl,
+    locationNameEl,
+    addressEl,
+    modalButtonEl
+  );
   imageContainerEl.append(eventImageEl, titleEl);
   cardEl.appendChild(imageContainerEl);
   cardEl.appendChild(titleEl);
   cardEl.appendChild(descriptionEl);
+  modalButtonEl.addEventListener("click", () => {
+    hotelApi(data);
+  });
+}
+
+function displayHotels() {
+  console.log("hello world");
 }
 
 // modal trigger
-$(document).ready(function(){
-  $('.modal').modal();
+$(document).ready(function () {
+  $(".modal").modal();
 });
-
-
-
 
 
 // function hotelApi (){
