@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/materialize.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    
+
     <title>FunZip</title>
   </head>
 
@@ -14,12 +14,14 @@
     <nav>
       <div class="nav-wrapper blue">
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="brand-logo"
-          >Don't Click Here!</a
+          >FunZip</a
         >
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="placeholder.html">Hotels</a></li>
-          <li><a href="placeholder.html">Comedy</a></li>
-          <li><a href="placeholder.html">Sports</a></li>
+          <li>
+            <a id="search-history" class="modal-trigger" href="#history-modal"
+              >Search History</a
+            >
+          </li>
         </ul>
       </div>
     </nav>
@@ -31,25 +33,29 @@
         </div>
       </section>
       <br /><br />
-      <div class="jumbo container">
-        <nav>
-          <div class="nav-wrapper blue">
-            <form>
-              <div class="input-field">
+      <div class="jumbo container row">
+        <nav class="row col s8">
+          <div class="nav-wrapper white row">
+            <form class="row">
+              <div class="input-field col s12">
                 <input id="search" type="search" title="search-city" required />
                 <label class="label-icon" for="search"
                   ><i class="material-icons"></i
                 ></label>
-                <a href="#footer" class="btn-large" id="searchBtn">search</a>
               </div>
             </form>
           </div>
         </nav>
+        <a
+          href="#footer"
+          class="btn-large orange col s3 offset-s1 bold-text"
+          id="searchBtn"
+          >search</a
+        >
         <br /><br /><br />
       </div>
     </div>
 
-    <!-- Displays All the Event cards on webpage -->
     <main class="flip hide" id="flipCards">
       <div id="card-parent" class="row"></div>
     </main>
@@ -61,102 +67,10 @@
 
     <!-- Modal Structure -->
     <div id="modal1" class="card-parent-1 modal z-depth-4">
-      <div id="hotel-opt" class="blue z-depth-5">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="center-align" id="hotel-name">Name of Hotel</h4>
-          </div>
-          <p id="hotel-address">Address</p>
-          <p>
-            This hotel is <span id="hotel-distance">2.57 mi</span> from this
-            event
-          </p>
-        </div>
-
-        <div class="modal-footer">
-          <a
-            href="#!"
-            class="waves-effect waves-light green modal-close btn-flat"
-            >SELECT</a
-          >
-          <a href="#!" class="waves-effect waves-light red modal-close btn-flat"
-            >EXIT</a
-          >
-        </div>
-      </div>
-
-      <div id="hotel-opt" class="blue z-depth-5">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="center-align" id="hotel-name">Name of Hotel</h4>
-          </div>
-          <p id="hotel-address">Address</p>
-          <p>
-            This hotel is <span id="hotel-distance">2.57 mi</span> from this
-            event
-          </p>
-        </div>
-
-        <div class="modal-footer">
-          <a
-            href="#!"
-            class="waves-effect waves-light green modal-close btn-flat"
-            >SELECT</a
-          >
-          <a href="#!" class="waves-effect waves-light red modal-close btn-flat"
-            >EXIT</a
-          >
-        </div>
-      </div>
-
-      <div id="hotel-opt" class="blue z-depth-5">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="center-align" id="hotel-name">Name of Hotel</h4>
-          </div>
-          <p id="hotel-address">Address</p>
-          <p>
-            This hotel is <span id="hotel-distance">2.57 mi</span> from this
-            event
-          </p>
-        </div>
-
-        <div class="modal-footer">
-          <a
-            href="#!"
-            class="waves-effect waves-light green modal-close btn-flat"
-            >SELECT</a
-          >
-          <a href="#!" class="waves-effect waves-light red modal-close btn-flat"
-            >EXIT</a
-          >
-        </div>
-      </div>
-
-      <div id="hotel-opt" class="blue z-depth-5">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="center-align" id="hotel-name">Name of Hotel</h4>
-          </div>
-          <p id="hotel-address">Address</p>
-          <p>
-            This hotel is <span id="hotel-distance">2.57 mi</span> from this
-            event
-          </p>
-        </div>
-        
-        <div class="modal-footer">
-          <a
-            href="#!"
-            class="waves-effect waves-light green modal-close btn-flat"
-            >SELECT</a
-          >
-          <a href="#!" class="waves-effect waves-light red modal-close btn-flat"
-            >EXIT</a
-          >
-        </div>
-      </div>
+   
     </div>
+    <div id="modal1" class="card-parent modal z-depth-4"></div>
+    <div id="history-modal" class="z-depth-4 modal row"></div>
 
     <!--Import our js and materialize js files -->
     <script
@@ -164,6 +78,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="./assets/js/materialize.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
