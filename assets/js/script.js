@@ -36,8 +36,9 @@ function fetchEventData(e) {
     });
 }
 
+// Function for placing & retreving recent searches into local storage
 function addToSearchHistory(e) {
-  var searchHistoryArray = JSON.parse(localStorage.getItem("searchHistory"));
+  var searchHistoryArray = JSON.parse(localStorage.getItem("searchHistory")); // When getting items from local storage you have to use JSON.parse
   console.log(e.target);
   if (!searchHistoryArray && e.target === searchBtn) {
     searchHistoryArray = [searchInput.value];
@@ -48,7 +49,7 @@ function addToSearchHistory(e) {
   } else {
     searchHistoryArray.push(e.target.textContent);
   }
-  localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
+  localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray)); // Use JSON.stringify to set items into local storage
 }
 
 async function retrieveHotelData(locationData, eventData, iterator) {
@@ -119,6 +120,7 @@ function hotelApi(eventData, iterator) {
     .catch((err) => console.error(err));
 }
 
+// Once user searches a new location the current cards are removed
 function removeOldEvents() {
   var eventsArray = document.querySelectorAll(".event-card");
   if (eventsArray) {
@@ -128,6 +130,7 @@ function removeOldEvents() {
   }
 }
 
+// Looping through events and displaying them onto the page
 function displayEvents(data) {
   for (i = 0; i < data.events.length; i++) {
     generateCards(data, i);
@@ -188,6 +191,8 @@ function generateCards(data, iterator) {
   cardEl.appendChild(imageContainerEl);
   cardEl.appendChild(titleEl);
   cardEl.appendChild(descriptionEl);
+
+
   modalButtonEl.addEventListener("click", async () => {
     removeOldHotels();
     var locationData = await retrieveLocationData(data, iterator);
@@ -196,29 +201,44 @@ function generateCards(data, iterator) {
   });
 }
 
+
+// Displaying Hotels on modal
 function displayHotels(hotelData) {
   var modalEl = document.getElementById("modal1");
   for (i = 0; i < hotelData.result.length; i++) {
     var hotelCardEl = document.createElement("div");
     hotelCardEl.classList = "card row hotel-card";
+
+    //Creating element to hold the image
     var hotelImageEl = document.createElement("img");
     hotelImageEl.setAttribute("src", hotelData.result[i].max_1440_photo_url);
     hotelImageEl.classList = "col s4";
+
+    //Creating element to hold all of the hotel information
     var hotelInfoEl = document.createElement("div");
     hotelInfoEl.classList = "col s5";
+
+    //Creating element to hold the hotel name & getting the name from the API 
     var hotelNameEl = document.createElement("h5");
-    hotelNameEl.innerHTML = hotelData.result[i].hotel_name;
+    hotelNameEl.innerHTML = hotelData.result[i].hotel_name;  // dynamically appeneding hotel name to page from API
+
+    //Creating element to hold the hotel address
     var hotelAddressEl = document.createElement("p");
     hotelAddressEl.innerHTML = hotelData.result[i].address;
+
+    //Creating element to hold the hotel price, & div to hold the price and book now buuton
     var toBookingCom = document.createElement("div");
     var hotelPriceEl = document.createElement("p");
-    hotelPriceEl.innerHTML =
-      hotelData.result[i].price_breakdown.all_inclusive_price;
+    hotelPriceEl.innerHTML = hotelData.result[i].price_breakdown.all_inclusive_price;
     hotelPriceEl.classList = "col s3";
+
+    //Creating element for the book now button
     toBookingComButtonEl = document.createElement("a");
     toBookingComButtonEl.classList = "waves-effect waves-light btn";
     toBookingComButtonEl.textContent = "BOOK NOW";
     toBookingComButtonEl.setAttribute("href", hotelData.result[i].url);
+
+    // Appeneding all the elemets to the modal
     toBookingCom.append(hotelPriceEl, toBookingComButtonEl);
     hotelInfoEl.append(hotelNameEl, hotelAddressEl);
     hotelCardEl.append(hotelImageEl, hotelInfoEl, toBookingCom);
@@ -231,6 +251,7 @@ $(document).ready(function () {
   $(".modal").modal();
 });
 
+// Search History functionality
 searchHistoryEl.addEventListener("click", () => {
   var historyModal = document.getElementById("history-modal");
   var formerSearchHistory = document.querySelectorAll(".search-history-button");
