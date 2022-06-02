@@ -137,7 +137,7 @@ function displayEvents(data) {
 
 function generateCards(data, iterator) {
   var cardEl = document.createElement("div");
-  cardEl.classList = "col s12 m4 l4 card event-card hoverable";
+  cardEl.classList = "col s12 m6 l4 card event-card hoverable";
   var titleEl = document.createElement("span");
   titleEl.classList = "card-title";
   titleEl.innerHTML = data.events[iterator].title;
