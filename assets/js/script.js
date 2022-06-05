@@ -7,6 +7,7 @@ searchBtn.addEventListener("click", fetchEventData);
 let searchInput = document.querySelector("#search");
 const cardSection = document.getElementById("card-parent");
 const searchHistoryEl = document.getElementById("search-history");
+const clearSearchHistoryEl = document.getElementById("clear-history");
 
 function fetchEventData(e) {
   console.log(e.target);
@@ -143,6 +144,7 @@ function generateCards(data, iterator) {
   titleEl.innerHTML = data.events[iterator].title;
   cardSection.appendChild(cardEl);
   var imageContainerEl = document.createElement("div");
+  imageContainerEl.classList = "card-image";
   var eventImageEl = document.createElement("img");
   if (data.events[i].performers[0].image != null) {
     eventImageEl.setAttribute("src", data.events[iterator].performers[0].image);
@@ -151,31 +153,39 @@ function generateCards(data, iterator) {
   }
   eventImageEl.classList = "card-image";
   var descriptionEl = document.createElement("div");
+  descriptionEl.classList = "event-description";
   var dateEl = document.createElement("p");
   var timeEl = document.createElement("p");
   var locationNameEl = document.createElement("p");
   var addressEl = document.createElement("p");
   var modalButtonEl = document.createElement("a");
-  modalButtonEl.classList = "waves-effect waves-light btn modal-trigger";
+  modalButtonEl.classList =
+    "waves-effect waves-light btn hotels-button modal-trigger";
   modalButtonEl.setAttribute("href", "#modal1");
   modalButtonEl.textContent = "HOTELS";
-  addressEl.innerHTML = "Adress: " + data.events[iterator].venue.address;
+  var ticketsButtonEl = document.createElement("a");
+  ticketsButtonEl.classList =
+    "waves-effect waves-light btn hotels-button modal-trigger red";
+  ticketsButtonEl.textContent = "TICKETS";
+  ticketsButtonEl.setAttribute("href", data.events[iterator].url);
+  var buttonsContainerEl = document.createElement("div");
+  buttonsContainerEl.classList = "buttons-container container valign-wrapper";
+  buttonsContainerEl.append(modalButtonEl, ticketsButtonEl);
+  addressEl.innerHTML =
+    "Adress: " +
+    data.events[iterator].venue.address +
+    " " +
+    data.events[iterator].venue.city +
+    ", " +
+    data.events[iterator].venue.state;
   dateEl.innerHTML =
     "Date: " + data.events[iterator].datetime_local.substring(0, 10);
   timeEl.innerHTML =
     "Time: " + data.events[iterator].datetime_local.substring(11);
   locationNameEl.innerHTML = "Location: " + data.events[iterator].venue.name;
-  descriptionEl.append(
-    dateEl,
-    timeEl,
-    locationNameEl,
-    addressEl,
-    modalButtonEl
-  );
+  descriptionEl.append(dateEl, timeEl, locationNameEl, addressEl);
   imageContainerEl.append(eventImageEl, titleEl);
-  cardEl.appendChild(imageContainerEl);
-  cardEl.appendChild(titleEl);
-  cardEl.appendChild(descriptionEl);
+  cardEl.append(imageContainerEl, titleEl, descriptionEl, buttonsContainerEl);
   modalButtonEl.addEventListener("click", async () => {
     removeOldHotels();
     var locationData = await retrieveLocationData(data, iterator);
@@ -199,12 +209,15 @@ function displayHotels(hotelData) {
     var hotelAddressEl = document.createElement("p");
     hotelAddressEl.innerHTML = hotelData.result[i].address;
     var toBookingCom = document.createElement("div");
+    toBookingCom.classList = "center-align row col s3";
     var hotelPriceEl = document.createElement("p");
     hotelPriceEl.innerHTML =
-      hotelData.result[i].price_breakdown.all_inclusive_price;
-    hotelPriceEl.classList = "col s3";
+      "$" +
+      hotelData.result[i].price_breakdown.all_inclusive_price +
+      " per night!";
+    hotelPriceEl.classList = "col s12";
     toBookingComButtonEl = document.createElement("a");
-    toBookingComButtonEl.classList = "waves-effect waves-light btn";
+    toBookingComButtonEl.classList = "waves-effect waves-light btn col s12";
     toBookingComButtonEl.textContent = "BOOK NOW";
     toBookingComButtonEl.setAttribute("href", hotelData.result[i].url);
     toBookingCom.append(hotelPriceEl, toBookingComButtonEl);
@@ -230,7 +243,7 @@ searchHistoryEl.addEventListener("click", () => {
     for (i = searchHistoryArray.length - 1; i >= 0; i--) {
       var historyButtonEl = document.createElement("a");
       historyButtonEl.classList =
-        "waves-effect waves-light btn search-history-button col s12";
+        "waves-effect waves-light btn grey darken-4 search-history-button col s12";
       historyButtonEl.textContent = searchHistoryArray[i];
       historyButtonEl.addEventListener("click", (e) => {
         $("#history-modal").modal("close");
@@ -254,3 +267,9 @@ function removeOldHotels() {
 function pageScroll() {
   window.scrollBy(0, 950);
 }
+
+function clearHistory() {
+  localStorage.removeItem("searchHistory");
+}
+
+clearSearchHistoryEl.addEventListener("click", clearHistory);
