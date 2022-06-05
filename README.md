@@ -25,6 +25,10 @@ The goal of our design was to make it convienent for users to plan multiple part
 ![search-history](./assets/readme-images/searchHistoryImage.png)
 ![hotels](./assets/readme-images/hotelsModalImage.png)
 
+# Technologies Used
+
+HTML, JavaScript, CSS, Materialize CSS, Materialize JavaScript
+
 # Future Enhancements
 
 We believe that there are several enhancements that we could make to our application. First, our hotels are currently limited to the city of the event. We could query our hotels against the address of the venue to get a more precise list of what hotels are nearby.
