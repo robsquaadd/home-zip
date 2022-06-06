@@ -12,7 +12,7 @@
 
   <body>
     <nav>
-      <div class="nav-wrapper blue">
+      <div class="nav-wrapper black">
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="brand-logo"
           >FunZip</a
         >
@@ -22,6 +22,7 @@
               >Search History</a
             >
           </li>
+          <li><a id="clear-history" href="#">Clear Search History</a></li>
         </ul>
       </div>
     </nav>
@@ -38,7 +39,13 @@
           <div class="nav-wrapper white row">
             <form class="row">
               <div class="input-field col s12">
-                <input id="search" type="search" title="search-city" required />
+                <input
+                  id="search"
+                  type="search"
+                  title="search-city"
+                  placeholder="Type in an Event, Performer, or City"
+                  required
+                />
                 <label class="label-icon" for="search"
                   ><i class="material-icons"></i
                 ></label>
@@ -48,7 +55,7 @@
         </nav>
         <a
           href="#footer"
-          class="btn-large orange col s3 offset-s1 bold-text"
+          class="btn-large orange col s3 offset-s1 bold-text hoverable"
           id="searchBtn"
           >search</a
         >
@@ -56,12 +63,12 @@
       </div>
     </div>
 
-    <main class="flip hide" id="flipCards">
+    <main class="flip hide container" id="flipCards">
       <div id="card-parent" class="row"></div>
     </main>
-
-    <!-- Footer Section -->
-    <footer class="page-footer blue darken-3 center" id="footer">
+    
+    <!-- Footer section -->
+    <footer class="page-footer black darken-3 center" id="footer">
       © 2020 Copyright Group 2
     </footer>
 

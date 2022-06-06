@@ -7,6 +7,7 @@ searchBtn.addEventListener("click", fetchEventData);
 let searchInput = document.querySelector("#search");
 const cardSection = document.getElementById("card-parent");
 const searchHistoryEl = document.getElementById("search-history");
+const clearSearchHistoryEl = document.getElementById("clear-history");
 
 // API #1 Seat Geek api - Calls for events
 function fetchEventData(e) {
@@ -33,6 +34,7 @@ function fetchEventData(e) {
       removeOldEvents();
       displayEvents(data);
       addToSearchHistory(e);
+      pageScroll();
     });
 }
 
@@ -141,7 +143,7 @@ function displayEvents(data) {
 // Function that appeneds cards to webpage. Also Checks to see if we get an image from Seatgeek API
 function generateCards(data, iterator) {
   var cardEl = document.createElement("div");
-  cardEl.classList = "col s12 m4 l4 card event-card hoverable";
+  cardEl.classList = "col s12 m6 l4 card event-card hoverable";
   var titleEl = document.createElement("span");
   titleEl.classList = "card-title";
 
@@ -150,6 +152,7 @@ function generateCards(data, iterator) {
 
   // Creating the image contaniers / validating if image is present
   var imageContainerEl = document.createElement("div");
+  imageContainerEl.classList = "card-image";
   var eventImageEl = document.createElement("img");
 
 
@@ -162,6 +165,7 @@ function generateCards(data, iterator) {
   // Event Detail Information  - Displays events info on flip card
   eventImageEl.classList = "card-image";
   var descriptionEl = document.createElement("div");
+  descriptionEl.classList = "event-description";
   var dateEl = document.createElement("p");
   var timeEl = document.createElement("p");
   var locationNameEl = document.createElement("p");
@@ -174,25 +178,29 @@ function generateCards(data, iterator) {
 
   // Dynamically appeneding Addess, Date & time to display flip card
   modalButtonEl.textContent = "HOTELS";
-  addressEl.innerHTML = "Adress: " + data.events[iterator].venue.address;
-  dateEl.innerHTML = "Date: " + data.events[iterator].datetime_local.substring(0, 10);
-  timeEl.innerHTML = "Time: " + data.events[iterator].datetime_local.substring(11);
+  var ticketsButtonEl = document.createElement("a");
+  ticketsButtonEl.classList =
+    "waves-effect waves-light btn hotels-button modal-trigger red";
+  ticketsButtonEl.textContent = "TICKETS";
+  ticketsButtonEl.setAttribute("href", data.events[iterator].url);
+  var buttonsContainerEl = document.createElement("div");
+  buttonsContainerEl.classList = "buttons-container container valign-wrapper";
+  buttonsContainerEl.append(modalButtonEl, ticketsButtonEl);
+  addressEl.innerHTML =
+    "Adress: " +
+    data.events[iterator].venue.address +
+    " " +
+    data.events[iterator].venue.city +
+    ", " +
+    data.events[iterator].venue.state;
+  dateEl.innerHTML =
+    "Date: " + data.events[iterator].datetime_local.substring(0, 10);
+  timeEl.innerHTML =
+    "Time: " + data.events[iterator].datetime_local.substring(11);
   locationNameEl.innerHTML = "Location: " + data.events[iterator].venue.name;
-
-  descriptionEl.append(
-    dateEl,
-    timeEl,
-    locationNameEl,
-    addressEl,
-    modalButtonEl
-  );
-
+  descriptionEl.append(dateEl, timeEl, locationNameEl, addressEl);
   imageContainerEl.append(eventImageEl, titleEl);
-  cardEl.appendChild(imageContainerEl);
-  cardEl.appendChild(titleEl);
-  cardEl.appendChild(descriptionEl);
-
-
+  cardEl.append(imageContainerEl, titleEl, descriptionEl, buttonsContainerEl);
   modalButtonEl.addEventListener("click", async () => {
     removeOldHotels();
     var locationData = await retrieveLocationData(data, iterator);
@@ -228,13 +236,15 @@ function displayHotels(hotelData) {
 
     //Creating element to hold the hotel price, & div to hold the price and book now buuton
     var toBookingCom = document.createElement("div");
+    toBookingCom.classList = "center-align row col s3";
     var hotelPriceEl = document.createElement("p");
-    hotelPriceEl.innerHTML = hotelData.result[i].price_breakdown.all_inclusive_price;
-    hotelPriceEl.classList = "col s3";
-
-    //Creating element for the book now button
+    hotelPriceEl.innerHTML =
+      "$" +
+      hotelData.result[i].price_breakdown.all_inclusive_price +
+      " per night!";
+    hotelPriceEl.classList = "col s12";
     toBookingComButtonEl = document.createElement("a");
-    toBookingComButtonEl.classList = "waves-effect waves-light btn";
+    toBookingComButtonEl.classList = "waves-effect waves-light btn col s12";
     toBookingComButtonEl.textContent = "BOOK NOW";
     toBookingComButtonEl.setAttribute("href", hotelData.result[i].url);
 
@@ -263,7 +273,7 @@ searchHistoryEl.addEventListener("click", () => {
     for (i = searchHistoryArray.length - 1; i >= 0; i--) {
       var historyButtonEl = document.createElement("a");
       historyButtonEl.classList =
-        "waves-effect waves-light btn search-history-button col s12";
+        "waves-effect waves-light btn grey darken-4 search-history-button col s12";
       historyButtonEl.textContent = searchHistoryArray[i];
       historyButtonEl.addEventListener("click", (e) => {
         $("#history-modal").modal("close");
@@ -284,29 +294,12 @@ function removeOldHotels() {
   }
 }
 
+function pageScroll() {
+  window.scrollBy(0, 950);
+}
 
-// function displayHotels() {
-//   console.log("hello world");
+function clearHistory() {
+  localStorage.removeItem("searchHistory");
+}
 
-//   const options = {
-//     method: 'GET',
-//     headers: {
-//       'X-RapidAPI-Host': 'hotel-price-aggregator.p.rapidapi.com',
-//       'X-RapidAPI-Key': 'e5eb4ef180mshbf601c540e61cb2p1b592bjsnf529ab523414'
-//     }
-//   };
-
-//   fetch('https://hotel-price-aggregator.p.rapidapi.com/search?q=300%2016th%20st', options)
-//     .then((response) => response.json())
-//     .then((data) => {
-
-
-//       let hotelName = document.querySelectorAll("#hotel-name")
-//       console.log(hotelName)
-//       for (let i = 0; i < hotelName.length; i++) {
-//         hotelName.innerHTML = data[i].shortName
-//         console.log(data[i].shortName)
-//       }
-
-//     })
-//     .catch((err) => console.error(err));
+clearSearchHistoryEl.addEventListener("click", clearHistory);

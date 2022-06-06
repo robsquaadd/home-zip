@@ -1,6 +1,14 @@
 * {
   margin: 0;
-  box-sizing: content-box;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(black, #b2beb5);
 }
 
 .jumbo {
@@ -10,13 +18,14 @@
 #header {
   text-align: center;
   padding-top: 100px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 .bg-color {
   background-color: rgba(255, 255, 255, 0.75);
   width: -moz-fit-content;
   width: fit-content;
-  padding: 5px;
+  padding: 15px;
   border-radius: 5px;
 }
 
@@ -30,11 +39,11 @@
 }
 
 .event-card {
-  height: 500px;
+  height: 550px;
 }
 
 .bg-img {
-  background-image: url("../pics/concertImg1.jpeg");
+  background-image: url("../pics/concertImg1bw.jpeg");
   min-height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,4 +51,34 @@
 
 .brand-logo {
   margin: auto auto auto 20px;
+}
+
+#search-history:hover,
+#clear-history:hover {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+}
+
+.search-history-button {
+  margin: 0.5%;
+}
+
+.event-description {
+  margin-top: 10px;
+}
+
+.buttons-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.hotels-button {
+  margin: 1%;
+}
+
+@media screen and (max-width: 578px) {
+  .event-card {
+    height: min-content;
+  }
 }
